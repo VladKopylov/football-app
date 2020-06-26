@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Btn = styled.button`
-  background-color:red;
+  background-color: red;
   padding: 11px;
 `;
 
@@ -11,7 +12,12 @@ type Prop = {
 };
 
 const App = ({ lang }: Prop): JSX.Element => {
-  return <div className='container'>I can speak only on {lang}<Btn>Click</Btn></div>;
+  return (
+    <div className='container'>
+      I can speak not only on {lang}
+      <Btn>Click</Btn>
+    </div>
+  );
 };
 
 export { App };

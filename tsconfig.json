@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "allowJs": true,
-    "types": ["@types/react", "@types/styled-components", "@types/react-dom"],
+    "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
       "components/*": ["src/*"]
