@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Btn = styled.button`
   background-color:red;
-  padding: 10px;
+  padding: 11px;
 `;
 
 type Prop = {
