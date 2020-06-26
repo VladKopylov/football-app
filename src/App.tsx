@@ -1,0 +1,17 @@
+import React from "react";
+import styled from 'styled-components';
+
+const Btn = styled.button`
+  background-color:red;
+  padding: 10px;
+`;
+
+type Prop = {
+  lang: string;
+};
+
+const App = ({ lang }: Prop): JSX.Element => {
+  return <div className='container'>I can speak only on {lang}<Btn>Click</Btn></div>;
+};
+
+export { App };
