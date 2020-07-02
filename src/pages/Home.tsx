@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ContentTemplate } from '../ui/templates/ContentTemplate';
+
 export function Home(): JSX.Element {
-  return <div>Home</div>;
+  return <ContentTemplate>Hello</ContentTemplate>;
 }
