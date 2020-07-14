@@ -1,4 +1,5 @@
 import { Home } from './Home';
+import { LoginPage } from './LoginPage';
 import { NotFound } from './NotFound';
 
 export const routes = () => [
@@ -6,6 +7,11 @@ export const routes = () => [
     path: '/',
     exact: true,
     component: Home,
+  },
+  {
+    path: '/login',
+    exact: true,
+    component: LoginPage,
   },
   {
     component: NotFound,

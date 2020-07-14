@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+export function Navbar() {
   return (
     <NavbarContainer>
       <Logo>Logo</Logo>
       <AuthSection>
-        <NavLink to='/sign-in'>Войти</NavLink>
+        <NavLink to='/login'>Войти</NavLink>
         <NavLink to='/create-account'>Cоздать аккаунт</NavLink>
       </AuthSection>
     </NavbarContainer>
@@ -47,5 +47,3 @@ const AuthSection = styled.div`
 `;
 
 const NavLink = NavItem.withComponent(Link);
-
-export { Navbar };
