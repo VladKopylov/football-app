@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { Input } from '../ui/atoms/Input';
 import { CenterContentTemplate } from '../ui/templates/CenteredContent';
+import { PrimaryButton } from '../ui/atoms/Button';
 
 export function LoginPage(): JSX.Element {
   return (
@@ -31,7 +32,7 @@ function LoginForm(): JSX.Element {
       />
       {errors.exampleRequired && <span>This field is required</span>}
 
-      <button type='submit'>Login</button>
+      <PrimaryButton type='submit'>Login</PrimaryButton>
     </form>
   );
 }
