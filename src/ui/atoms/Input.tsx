@@ -10,7 +10,7 @@ type Props = {
   myRef: RefCallback<HTMLInputElement>;
   label?: string;
   autoComplete?: string;
-  error?: string;
+  error?: { message: string };
 };
 
 export function Input({
@@ -33,13 +33,12 @@ export function Input({
         error={Boolean(error)}
         type={type}
       />
-      {error && <ErrorInput />}
+      {error && <ErrorInput>{error.message}</ErrorInput>}
     </Col>
   );
 }
 
 const InputComponent = styled.input`
-  width: 100%;
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 4px;
@@ -70,4 +69,7 @@ type InputComponentProps = {
 
 const LabelInput = styled.label``;
 
-const ErrorInput = styled.label``;
+const ErrorInput = styled.label`
+  color: red;
+  margin-top: 5px;
+`;

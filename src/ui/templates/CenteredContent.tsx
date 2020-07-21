@@ -31,4 +31,5 @@ const Centered = styled.main`
   flex-grow: 1;
   overflow-y: auto;
   flex-direction: column;
+  background: linear-gradient(#0b5351, honeydew);
 `;
