@@ -9,6 +9,10 @@ const styledComponentsTransformer = createStyledComponentsTransformer();
 module.exports = {
   entry: './src/index.tsx',
   resolve: {
+    alias: {
+      ui: path.resolve(__dirname, 'src/ui/'),
+      libs: path.resolve(__dirname, 'src/libs/'),
+    },
     extensions: ['.ts', '.tsx', '.js'],
   },
   output: {
