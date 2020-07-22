@@ -13,7 +13,8 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "components/*": ["src/*"]
+      "ui/*": ["./src/ui/*"],
+      "libs/*": ["./src/libs/*"]
     }
   }
 }

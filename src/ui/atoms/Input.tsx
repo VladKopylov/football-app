@@ -10,7 +10,7 @@ type Props = {
   myRef: RefCallback<HTMLInputElement>;
   label?: string;
   autoComplete?: string;
-  error?: { message: string };
+  error?: { message?: string };
 };
 
 export function Input({

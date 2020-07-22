@@ -1,5 +1,5 @@
 import { Home } from './Home';
-import { LoginPage } from './LoginPage';
+import { LoginPage } from './auth/login/page';
 import { NotFound } from './NotFound';
 
 export const routes = () => [
