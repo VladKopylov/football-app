@@ -14,7 +14,6 @@ const Button = styled.button`
   text-decoration: none;
   transition: background-color 200ms, color 200ms;
   user-select: none;
-  max-width: 160px;
 
   &:disabled,
   &:disabled:hover,

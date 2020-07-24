@@ -1,7 +1,7 @@
 import React, { RefCallback } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Col } from '../../libs/styled-layouts';
+import { Col } from 'libs/styled-layouts';
 
 type Props = {
   name: string;
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function Input({
-  autoComplete,
+  autoComplete = 'off',
   name,
   myRef,
   placeholder,

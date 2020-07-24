@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { Card } from 'ui/atoms/Card';
-import { Container, CenterContentTemplate } from 'ui/templates/';
+import { CenterContentTemplate } from 'ui/templates/CenteredContent';
+import { Container } from 'ui/templates/Container';
 import { Col } from 'libs/styled-layouts';
-import { LoginForm } from './LoginForm';
+import { Card } from 'ui/atoms';
+import { CreateAccountForm } from './CreateAccountForm';
 
-export function LoginPage(): JSX.Element {
+export function CreateAccountPage(): JSX.Element {
   return (
     <CenterContentTemplate>
       <Container justify='center' align='center'>
         <Col align='stretch' width='30rem'>
           <Card>
-            <LoginForm />
+            <CreateAccountForm />
           </Card>
         </Col>
       </Container>
