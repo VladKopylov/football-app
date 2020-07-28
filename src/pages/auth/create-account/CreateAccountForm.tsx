@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { Col, Row } from 'libs/styled-layouts';
 import { H2, Input, OutlinedButton, PrimaryButton } from 'ui/atoms';
+import { Datepicker } from 'ui/molecules/datepicker';
 
 type FormData = {
   firstName: string;
@@ -31,21 +32,25 @@ export function CreateAccountForm(): JSX.Element {
       <Col gap='1rem'>
         <H2>Создание аккаунта</H2>
         <Row justify='space-between'>
-          <Input placeholder='Имя' name='firstName' myRef={register} />
-          <Input placeholder='Фамилия' name='lastName' myRef={register} />
+          {/*<Input placeholder='Имя' name='firstName' myRef={register} />*/}
+          {/*<Input placeholder='Фамилия' name='lastName' myRef={register} />*/}
         </Row>
         <Row justify='space-between' align='center'>
-          <Input placeholder='Дата рождения' name='birthDay' myRef={register} />
+          <Datepicker
+            placeholder='Дата рождения'
+            name='birthDay'
+            myRef={register}
+          />
           24 года
         </Row>
-        <Input placeholder='Email' name='email' myRef={register} />
-        <Input
-          placeholder='Пароль'
-          name='password'
-          type='password'
-          myRef={register}
-        />
-        <Input placeholder='Ведущая нога' name='leadingLeg' myRef={register} />
+        {/*<Input placeholder='Email' name='email' myRef={register} />*/}
+        {/*<Input*/}
+        {/*  placeholder='Пароль'*/}
+        {/*  name='password'*/}
+        {/*  type='password'*/}
+        {/*  myRef={register}*/}
+        {/*/>*/}
+        {/*<Input placeholder='Ведущая нога' name='leadingLeg' myRef={register} />*/}
         <Row justify='flex-end' gap='1rem'>
           <OutlinedButton onClick={handleBack}>Назад</OutlinedButton>
           <PrimaryButton type='submit'>Создать аккаунт</PrimaryButton>
