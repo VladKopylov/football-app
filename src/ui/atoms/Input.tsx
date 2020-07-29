@@ -34,7 +34,7 @@ export function Input(props: Props): JSX.Element {
 
   return (
     <Col>
-      {label && <LabelInput />}
+      {label && <LabelInput>{label}</LabelInput>}
       <InputComponent
         autoComplete={autoComplete}
         name={name}

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { Col, Row } from 'libs/styled-layouts';
 import { H2, Input, OutlinedButton, PrimaryButton } from 'ui/atoms';
 import { Datepicker } from 'ui/molecules/datepicker';
+import { Dropdown } from 'ui/molecules/dropdown';
 
 type FormData = {
   firstName: string;
@@ -16,7 +17,7 @@ type FormData = {
 };
 
 export function CreateAccountForm(): JSX.Element {
-  const { handleSubmit, register, errors } = useForm<FormData>();
+  const { handleSubmit, register, control, errors } = useForm<FormData>();
   const history = useHistory();
 
   const handleBack = () => {
@@ -32,8 +33,18 @@ export function CreateAccountForm(): JSX.Element {
       <Col gap='1rem'>
         <H2>Создание аккаунта</H2>
         <Row justify='space-between'>
-          {/*<Input placeholder='Имя' name='firstName' myRef={register} />*/}
-          {/*<Input placeholder='Фамилия' name='lastName' myRef={register} />*/}
+          <Input
+            placeholder='Введите имя...'
+            label='Имя'
+            name='firstName'
+            myRef={register}
+          />
+          <Input
+            placeholder='Введите фамилию...'
+            label='Фамилия'
+            name='lastName'
+            myRef={register}
+          />
         </Row>
         <Row justify='space-between' align='center'>
           <Datepicker
@@ -43,14 +54,28 @@ export function CreateAccountForm(): JSX.Element {
           />
           24 года
         </Row>
-        {/*<Input placeholder='Email' name='email' myRef={register} />*/}
-        {/*<Input*/}
-        {/*  placeholder='Пароль'*/}
-        {/*  name='password'*/}
-        {/*  type='password'*/}
-        {/*  myRef={register}*/}
-        {/*/>*/}
-        {/*<Input placeholder='Ведущая нога' name='leadingLeg' myRef={register} />*/}
+        <Input
+          label='Email'
+          placeholder='Введите email...'
+          name='email'
+          myRef={register}
+        />
+        <Input
+          label='Пароль'
+          placeholder='Введите пароль'
+          name='password'
+          type='password'
+          myRef={register}
+        />
+        <Dropdown
+          name='leadingLeg'
+          label='Ведущая нога'
+          control={control}
+          options={[
+            { value: 1, label: 'Левая' },
+            { value: 2, label: 'Правая' },
+          ]}
+        />
         <Row justify='flex-end' gap='1rem'>
           <OutlinedButton onClick={handleBack}>Назад</OutlinedButton>
           <PrimaryButton type='submit'>Создать аккаунт</PrimaryButton>
