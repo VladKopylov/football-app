@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mixins, MixinType } from '../../libs/styled-layouts';
+import { mixins, MixinType } from 'libs/styled-layouts';
 
 export const Container = styled.div<MixinType>`
   ${mixins};

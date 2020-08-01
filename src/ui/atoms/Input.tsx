@@ -1,37 +1,51 @@
 import React, { RefCallback } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Col } from '../../libs/styled-layouts';
+import { Col } from 'libs/styled-layouts';
 
 type Props = {
-  name: string;
+  name?: string;
+  value?: string;
   type?: string;
   placeholder?: string;
   myRef: RefCallback<HTMLInputElement>;
   label?: string;
   autoComplete?: string;
+  onClick?: () => void;
+  onChange?: (e: any) => void;
+  onBlur?: () => void;
   error?: { message?: string };
 };
 
-export function Input({
-  autoComplete,
-  name,
-  myRef,
-  placeholder,
-  type,
-  label,
-  error,
-}: Props): JSX.Element {
+export function Input(props: Props): JSX.Element {
+  const {
+    autoComplete = 'off',
+    name,
+    value,
+    myRef,
+    placeholder,
+    type,
+    label,
+    onClick,
+    onChange,
+    onBlur,
+    error,
+  } = props;
+
   return (
     <Col>
-      {label && <LabelInput />}
+      {label && <LabelInput>{label}</LabelInput>}
       <InputComponent
         autoComplete={autoComplete}
         name={name}
+        value={value}
         placeholder={placeholder}
         ref={myRef}
         error={Boolean(error)}
         type={type}
+        onChange={onChange}
+        onClick={onClick}
+        onBlur={onBlur}
       />
       {error && <ErrorInput>{error.message}</ErrorInput>}
     </Col>

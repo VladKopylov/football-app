@@ -6,9 +6,11 @@ import { App } from './App';
 import { GlobalStyles } from './GlobalStyles';
 
 ReactDOM.render(
-  <HashRouter>
+  <>
     <GlobalStyles />
-    <App />
-  </HashRouter>,
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </>,
   document.querySelector('#root'),
 );

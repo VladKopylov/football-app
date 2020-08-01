@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export function Navbar() {
+export function Navbar(): JSX.Element {
   return (
     <NavbarContainer>
       <Logo>Logo</Logo>
       <AuthSection>
-        <NavLink to='/login'>Войти</NavLink>
-        <NavLink to='/create-account'>Cоздать аккаунт</NavLink>
+        <NavLink to='/auth/login'>Войти</NavLink>
+        <NavLink to='/auth/create-account'>Cоздать аккаунт</NavLink>
       </AuthSection>
     </NavbarContainer>
   );

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-type FlexPosition = 'center' | 'stretch' | 'flex-end';
+type FlexPosition = 'center' | 'stretch' | 'flex-end' | 'space-between';
 
 export type MixinType = {
   justify?: FlexPosition;
