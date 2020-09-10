@@ -1,14 +1,10 @@
-import React, { useState, useEffect, RefCallback } from 'react';
+import React, { useState, useEffect, RefCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import daysjs from 'dayjs';
+import dayjs from 'dayjs';
 
 import { Input } from 'ui/atoms';
-import {
-  DAYS,
-  DAYS_LEAP,
-  DAYS_OF_THE_WEEK,
-  MONTHS,
-} from 'ui/molecules/datepicker/constants';
+import { useOnClickOutside } from 'libs/hooks/useOnClickOutside';
+import { DAYS_OF_THE_WEEK, MONTHS } from 'ui/molecules/datepicker/constants';
 
 type Props = {
   placeholder: string;
@@ -17,39 +13,46 @@ type Props = {
 };
 
 export function Datepicker({ name, placeholder, myRef }: Props): JSX.Element {
+  const ref = useRef();
   const [isOpen, setOpen] = useState(false);
   const today = new Date();
+  const weekendDays = [6, 0]; // Saturday and Sunday
   const [date, setDate] = useState(today);
-  const [dateValue, setDateValue] = useState(null);
+  const [dateValue, setDateValue] = useState('');
   const [day, setDay] = useState(date.getDate());
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
-  const [startDay, setStartDay] = useState(getStartDayOfMonth(date));
+  const [startDay, setStartDay] = useState(dayjs().date(1).day() || 7);
+
+  useOnClickOutside(ref, () => setOpen(false));
 
   useEffect(() => {
     setDay(date.getDate());
     setMonth(date.getMonth());
     setYear(date.getFullYear());
-    setStartDay(getStartDayOfMonth(date));
-    setDateValue(daysjs(date).format('DD/MM/YYYY'));
+    setStartDay(dayjs(date).date(1).day() || 7);
+    setDateValue(dayjs(date).format('DD/MM/YYYY'));
   }, [date]);
-
-  const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
-
-  function getStartDayOfMonth(date: Date) {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  }
 
   function handleFocusInput() {
     setOpen(true);
   }
 
-  const handleSelectDate = (d: any) => (e: any) => {
+  const handleSelectDate = (d: number) => (e: any) => {
     setDate(new Date(year, month, d));
     setOpen(false);
   };
+
+  function setNextMonth() {
+    setDate(dayjs(date).add(1, 'month').toDate());
+  }
+
+  function setPrevMonth() {
+    setDate(dayjs(date).subtract(1, 'month').toDate());
+  }
+
   return (
-    <div>
+    <DatepickerWrapper ref={ref}>
       <Input
         myRef={myRef}
         name={name}
@@ -60,15 +63,11 @@ export function Datepicker({ name, placeholder, myRef }: Props): JSX.Element {
       />
       <Frame isOpen={isOpen}>
         <Header>
-          <Button onClick={() => setDate(new Date(year, month - 1, day))}>
-            Prev
-          </Button>
+          <Button onClick={setPrevMonth}>Prev</Button>
           <div>
             {MONTHS[month]} {year}
           </div>
-          <Button onClick={() => setDate(new Date(year, month + 1, day))}>
-            Next
-          </Button>
+          <Button onClick={setNextMonth}>Next</Button>
         </Header>
         <Body>
           {DAYS_OF_THE_WEEK.map((d) => (
@@ -76,31 +75,44 @@ export function Datepicker({ name, placeholder, myRef }: Props): JSX.Element {
               <strong>{d}</strong>
             </Day>
           ))}
-          {Array(days[month] + (startDay - 1))
+          {Array(dayjs(date).daysInMonth() + (startDay - 1))
             .fill(null)
             .map((_, index) => {
               const d = index - (startDay - 2);
+              const isDisplayDay = d > 0;
+              const isWeekendDay =
+                isDisplayDay && weekendDays.includes(dayjs(date).date(d).day());
               return (
                 <Day
                   key={index}
                   isToday={d === today.getDate()}
                   isSelected={d === day}
+                  isDisplayDay={isDisplayDay}
+                  isWeekendDay={isWeekendDay}
                   onClick={handleSelectDate(d)}
                 >
-                  {d > 0 ? d : ''}
+                  {isDisplayDay ? d : ''}
                 </Day>
               );
             })}
         </Body>
       </Frame>
-    </div>
+    </DatepickerWrapper>
   );
 }
 
+const DatepickerWrapper = styled.div`
+  position: relative;
+`;
+
 const Frame = styled.div<{ isOpen: boolean }>`
-  width: 400px;
+  width: 300px;
+  margin-top: 10px;
   border: 1px solid lightgrey;
   box-shadow: 2px 2px 2px #eee;
+  background-color: white;
+  position: absolute;
+  z-index: 10;
 
   ${(props) =>
     !props.isOpen &&
@@ -128,8 +140,13 @@ const Body = styled.div`
   flex-wrap: wrap;
 `;
 
-const Day = styled.div<{ isToday?: boolean; isSelected?: boolean }>`
-  width: 14.2%;
+const Day = styled.div<{
+  isToday?: boolean;
+  isSelected?: boolean;
+  isDisplayDay?: boolean;
+  isWeekendDay?: boolean;
+}>`
+  width: 13.2%;
   height: 40px;
   display: flex;
   align-items: center;
@@ -137,18 +154,23 @@ const Day = styled.div<{ isToday?: boolean; isSelected?: boolean }>`
   cursor: pointer;
 
   ${(props) =>
-    props.isToday &&
-    css`
-      border: 1px solid #eee;
-    `}
-
-  ${(props) =>
     props.isSelected &&
     css`
-      background-color: #eee;
+      border: 1px solid #4e8098;
+      width: 13%;
+      height: 38px;
+    `}
+  
+  ${({ isWeekendDay }) =>
+    isWeekendDay &&
+    css`
+      color: red;
+    `}
+  ${({ isDisplayDay }) =>
+    isDisplayDay &&
+    css`
+      &:hover {
+        background-color: #eef6fb;
+      }
     `}
 `;
-
-function isLeapYear(year: number) {
-  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-}

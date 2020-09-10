@@ -1,5 +1,3 @@
-export const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-export const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 export const DAYS_OF_THE_WEEK = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
 export const MONTHS = [
   'ЯНВАРЬ',

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useMutation } from '@apollo/react-hooks';
+import { SIGN_UP } from '../../../features/auth/apollo/queries';
+import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { Col, Row } from 'libs/styled-layouts';
