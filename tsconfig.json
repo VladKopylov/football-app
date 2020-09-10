@@ -14,7 +14,8 @@
     "baseUrl": "./",
     "paths": {
       "ui/*": ["./src/ui/*"],
-      "libs/*": ["./src/libs/*"]
+      "libs/*": ["./src/libs/*"],
+      "features/*": ["./src/features/*"]
     }
-  },
+  }
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { SIGN_UP } from '../../../features/auth/apollo/queries';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
