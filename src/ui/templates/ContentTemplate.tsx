@@ -10,7 +10,7 @@ type Props = {
   footer: ReactNode;
 };
 
-function ContentTemplate({ header, children, footer }: Props) {
+function ContentTemplate({ header, children, footer }: Props): JSX.Element {
   return (
     <MainTemplate header={header} footer={footer}>
       <CommonContent>{children}</CommonContent>

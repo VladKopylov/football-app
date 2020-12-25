@@ -12,6 +12,8 @@ module.exports = {
     alias: {
       ui: path.resolve(__dirname, 'src/ui/'),
       libs: path.resolve(__dirname, 'src/libs/'),
+      features: path.resolve(__dirname, 'src/features'),
+      constants: path.resolve(__dirname, 'src/constants'),
     },
     extensions: ['.ts', '.tsx', '.js'],
   },

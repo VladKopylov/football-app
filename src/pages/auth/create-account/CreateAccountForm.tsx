@@ -1,13 +1,12 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { SIGN_UP } from '../../../features/auth/apollo/queries';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { SIGN_UP } from 'features/auth/apollo/queries';
 import { Col, Row } from 'libs/styled-layouts';
 import { H2, Input, OutlinedButton, PrimaryButton } from 'ui/atoms';
-import { Datepicker } from 'ui/molecules/datepicker';
-import { Dropdown } from 'ui/molecules/dropdown';
+import { Dropdown, Datepicker } from 'ui/molecules';
 
 type FormData = {
   firstName: string;
@@ -39,20 +38,22 @@ export function CreateAccountForm(): JSX.Element {
             placeholder='Введите имя...'
             label='Имя'
             name='firstName'
-            myRef={register}
+            ref={register}
           />
           <Input
             placeholder='Введите фамилию...'
             label='Фамилия'
             name='lastName'
-            myRef={register}
+            ref={register}
           />
         </Row>
         <Row justify='space-between' align='center'>
           <Datepicker
-            placeholder='Дата рождения'
-            name='birthDay'
-            myRef={register}
+            placeholder='Введите...'
+            label='Дата рождения'
+            name='birth'
+            register={register}
+            control={control}
           />
           24 года
         </Row>
@@ -60,14 +61,14 @@ export function CreateAccountForm(): JSX.Element {
           label='Email'
           placeholder='Введите email...'
           name='email'
-          myRef={register}
+          ref={register}
         />
         <Input
           label='Пароль'
           placeholder='Введите пароль'
           name='password'
           type='password'
-          myRef={register}
+          ref={register}
         />
         <Dropdown
           name='leadingLeg'

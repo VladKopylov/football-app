@@ -15,7 +15,9 @@
     "paths": {
       "ui/*": ["./src/ui/*"],
       "libs/*": ["./src/libs/*"],
-      "features/*": ["./src/features/*"]
+      "features/*": ["./src/features/*"],
+      "models/*": ["./src/models/*"],
+      "constants/*": ["./src/constants/*"]
     }
   }
 }

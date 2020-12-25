@@ -1,9 +1,13 @@
 import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { H2, Input, OutlinedButton, PrimaryButton } from 'ui/atoms';
+import { LOGIN } from 'features/auth/apollo/queries';
 import { Col, Row } from 'libs/styled-layouts';
+import { H2, Input, OutlinedButton, PrimaryButton } from 'ui/atoms';
+import { useLocalStorage } from 'libs/hooks/useLocalStorage';
+import { Urls } from 'constants/urls';
 
 type FormData = {
   login: string;
@@ -13,8 +17,20 @@ type FormData = {
 export function LoginForm(): JSX.Element {
   const { handleSubmit, register, errors } = useForm<FormData>();
   const history = useHistory();
+  const [login] = useMutation(LOGIN);
+  const [userToken, setToken] = useLocalStorage('userToken', null);
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (formValues: FormData) => {
+    try {
+      console.log('formValues:', formValues);
+      const { data } = await login({ variables: formValues });
+      console.log('data:', data);
+      setToken(data.login.token);
+      history.push(Urls.MAIN);
+    } catch (e) {
+      console.log('e:', e.message);
+    }
+  };
 
   const handleBack = () => {
     history.goBack();
@@ -27,12 +43,12 @@ export function LoginForm(): JSX.Element {
         <Input
           placeholder='Email / имя пользователя'
           name='login'
-          myRef={register}
+          ref={register}
         />
         <Input
           placeholder='Пароль'
           name='password'
-          myRef={register({ required: 'Это поле обязательно' })}
+          ref={register({ required: 'Это поле обязательно' })}
           error={errors.password}
           type='password'
         />

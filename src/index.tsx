@@ -1,25 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 import { App } from './App';
 import { GlobalStyles } from './GlobalStyles';
+import { cache } from './cache';
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+  return {
+    headers: {
+      ...headers,
+      authorization: userToken ? `Bearer ${userToken}` : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
-  cache: new InMemoryCache(),
+  cache,
+  link: authLink.concat(httpLink),
+  connectToDevTools: true,
 });
+
 const A = () => (
-  <ApolloProvider client={client as any}>
-    <ApolloHooksProvider client={client}>
-      <GlobalStyles />
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </ApolloHooksProvider>
+  <ApolloProvider client={client}>
+    <GlobalStyles />
+    <HashRouter>
+      <App />
+    </HashRouter>
   </ApolloProvider>
 );
 ReactDOM.render(<A />, document.querySelector('#root'));
