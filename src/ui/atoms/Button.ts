@@ -6,7 +6,7 @@ type ButtonProps = {
 };
 
 const Button = styled.button`
-  border-radius: 4px;
+    border-radius: 4px;
   cursor: pointer;
   font-size: 18px;
   outline: none;
