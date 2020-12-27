@@ -7,7 +7,7 @@ type Props = {
   footer: ReactNode;
 };
 
-function MainTemplate({ header, children, footer }: Props) {
+function MainTemplate({ header, children, footer }: Props): JSX.Element {
   return (
     <MainContainer>
       {header && <Header>{header}</Header>}

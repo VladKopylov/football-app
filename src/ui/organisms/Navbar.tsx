@@ -19,7 +19,7 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: #4e8098;
-  height: 10vh;
+  height: 6vh;
   box-shadow: -2px -2px 47px 11px rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 18px;

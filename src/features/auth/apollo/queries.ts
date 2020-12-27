@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
 export const SIGN_UP = gql`
   mutation SignUp(
@@ -17,5 +17,25 @@ export const SIGN_UP = gql`
         passwordConfirmation: $passwordConfirmation
       }
     )
+  }
+`;
+
+export const LOGIN = gql`
+  mutation Login($login: String!, $password: String!) {
+    login(data: { email: $login, password: $password }) {
+      token
+      user {
+        email
+      }
+    }
+  }
+`;
+
+export const ME = gql`
+  query getMeInfo{
+    me {
+      firstName
+      lastName
+    }
   }
 `;

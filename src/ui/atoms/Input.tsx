@@ -1,4 +1,6 @@
-import React, { RefCallback } from 'react';
+/*eslint-disable react/display-name*/
+
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Col } from 'libs/styled-layouts';
@@ -8,49 +10,60 @@ type Props = {
   value?: string;
   type?: string;
   placeholder?: string;
-  myRef: RefCallback<HTMLInputElement>;
   label?: string;
   autoComplete?: string;
   onClick?: () => void;
   onChange?: (e: any) => void;
   onBlur?: () => void;
+  onFocus?: () => void;
+  onKeyDown?: () => void;
+  onKeyUp?: () => void;
   error?: { message?: string };
 };
 
-export function Input(props: Props): JSX.Element {
-  const {
-    autoComplete = 'off',
-    name,
-    value,
-    myRef,
-    placeholder,
-    type,
-    label,
-    onClick,
-    onChange,
-    onBlur,
-    error,
-  } = props;
+type InputComponentProps = {
+  error: boolean;
+  ref: any;
+};
 
-  return (
-    <Col>
-      {label && <LabelInput>{label}</LabelInput>}
-      <InputComponent
-        autoComplete={autoComplete}
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        ref={myRef}
-        error={Boolean(error)}
-        type={type}
-        onChange={onChange}
-        onClick={onClick}
-        onBlur={onBlur}
-      />
-      {error && <ErrorInput>{error.message}</ErrorInput>}
-    </Col>
-  );
-}
+const Input = forwardRef(
+  (
+    {
+      autoComplete = 'off',
+      name,
+      value,
+      placeholder,
+      type,
+      label,
+      onClick,
+      onChange,
+      onBlur,
+      error,
+    }: Props,
+    ref,
+  ): JSX.Element => {
+    return (
+      <Col>
+        {label && <LabelInput>{label}</LabelInput>}
+        <InputComponent
+          autoComplete={autoComplete}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          ref={ref}
+          error={Boolean(error)}
+          type={type}
+          onChange={onChange}
+          onClick={onClick}
+          onBlur={onBlur}
+        />
+        {error && <ErrorInput>{error.message}</ErrorInput>}
+      </Col>
+    );
+  },
+);
+
+export { Input };
 
 const InputComponent = styled.input`
   padding: 10px 15px;
@@ -72,14 +85,6 @@ const InputComponent = styled.input`
       }
     `}
 `;
-
-Input.defaultProps = {
-  autoComplete: 'off',
-};
-
-type InputComponentProps = {
-  error: boolean;
-};
 
 const LabelInput = styled.label``;
 
