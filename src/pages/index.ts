@@ -6,10 +6,12 @@ import { NotFound } from './NotFound';
 import { NewTournamentPage } from './new-tournament/page';
 import {
   Step1,
-  Step2, Step3,
+  Step2,
+  Step3,
 } from 'features/create-tournament/organisms/new-tournament-wizard-form/steps';
+import { RouteConfig, } from 'react-router-config';
 
-export const routes = [
+export const routes:  RouteConfig[] = [
   {
     path: Urls.MAIN,
     exact: true,
