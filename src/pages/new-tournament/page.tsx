@@ -1,17 +1,23 @@
 import React from 'react';
+import { RouteConfig } from 'react-router-config';
 
 import { Container, CenterContentTemplate } from 'ui/templates';
 import { Col } from 'libs/styled-layouts';
 import { Card } from 'ui/atoms';
-import { NewTournamentForm } from './NewTournamentForm';
+import { NewTournamentWizardForm } from 'features/create-tournament/organisms/new-tournament-wizard-form/NewTournamentWizardForm';
 
-const NewTournamentPage = () => {
+type Props = {
+  route: RouteConfig;
+};
+
+const NewTournamentPage = ({ route }: Props) => {
+  console.log('route:', route);
   return (
     <CenterContentTemplate>
       <Container justify='center' align='center'>
         <Col align='stretch' width='30rem'>
           <Card>
-            <NewTournamentForm />
+            <NewTournamentWizardForm routes={route.routes} />
           </Card>
         </Col>
       </Container>

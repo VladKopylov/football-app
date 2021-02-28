@@ -28,6 +28,7 @@
     "html-webpack-plugin": "^4.0.4",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
+    "little-state-machine": "^4.1.0",
     "prettier": "^2.2.1",
     "style-loader": "^1.2.1",
     "stylelint": "^13.6.1",

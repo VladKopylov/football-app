@@ -3,5 +3,5 @@ import { renderRoutes } from 'react-router-config';
 import { routes } from './pages';
 
 export function Routes(): JSX.Element {
-  return <>{renderRoutes(routes())}</>;
+  return <>{renderRoutes(routes)}</>;
 }

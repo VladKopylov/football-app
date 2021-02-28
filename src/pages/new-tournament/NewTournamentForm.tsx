@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
 
 import { Col, Row } from 'libs/styled-layouts';
 import { H2, Input, OutlinedButton, PrimaryButton } from 'ui/atoms';
